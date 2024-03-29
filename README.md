@@ -143,3 +143,5 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 
 # Froker xP
 Chaima Ben Slima 
+Nacim Saafi
+Khali Bahi
