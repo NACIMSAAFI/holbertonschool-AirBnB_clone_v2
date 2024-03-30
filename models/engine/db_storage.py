@@ -42,23 +42,17 @@ class DBStorage:
         (self.__session) all objects depending 
         of the class name (argument cls)
         """
-        objs_list = []
-        if cls:
-            if isinstance(cls, str):
-                try:
-                    cls = globals()[cls]
-                except KeyError:
-                    pass
-            if issubclass(cls, Base):
-                objs_list = self.__session.query(cls).all()
+        classes = [State, City, User, Place]
+        if cls is None:
+            obj = self.__session.query(State).all()
+            for cls in classes:
+                obj.extend(self.__session.query(cls).all())
         else:
-            for subclass in Base.__subclasses__():
-                objs_list.extend(self.__session.query(subclass).all())
-        obj_dict = {}
-        for obj in objs_list:
-            key = "{}.{}".format(obj.__class__.__name__, obj.id)
-            obj_dict[key] = obj
-        return obj_dict
+            if isinstance(cls, str):
+                cls = globals()[cls]  
+            obj = self.__session.query(cls).all()
+        return {"{}.{}".format(type(o).__name__, o.id): o for o in obj}
+
     
     def new(self, obj):
         """
