@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-the FileStorage class
+Contains the FileStorage class
 """
 
 import json
@@ -19,7 +19,9 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 class FileStorage:
     """serializes instances to a JSON file & deserializes back to instances"""
 
+    # string - path to the JSON file
     __file_path = "file.json"
+    # dictionary - empty but will store all objects by <class name>.id
     __objects = {}
 
     def all(self, cls=None):
@@ -39,7 +41,7 @@ class FileStorage:
             self.__objects[key] = obj
 
     def save(self):
-        """serializes __objects to the JSON file"""
+        """serializes __objects to the JSON file (path: __file_path)"""
         json_objects = {}
         for key in self.__objects:
             json_objects[key] = self.__objects[key].to_dict()
@@ -64,5 +66,5 @@ class FileStorage:
                 del self.__objects[key]
 
     def close(self):
-        """deserializes the JSON file to objects"""
+        """call reload() method for deserializing the JSON file to objects"""
         self.reload()

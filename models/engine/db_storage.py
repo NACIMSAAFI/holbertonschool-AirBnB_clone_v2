@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-the class DBStorage
+Contains the class DBStorage
 """
 
 import models
@@ -72,5 +72,5 @@ class DBStorage:
         self.__session = Session
 
     def close(self):
-        """call remove() """
+        """call remove() method on the private session attribute"""
         self.__session.remove()
