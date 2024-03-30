@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""
-Contains class BaseModel
+""" class BaseModel
 """
 
 from datetime import datetime
@@ -20,7 +19,7 @@ else:
 
 
 class BaseModel:
-    """The BaseModel class from which future classes will be derived"""
+    """The BaseModel class"""
     if models.storage_t == "db":
         id = Column(String(60), primary_key=True)
         created_at = Column(DateTime, default=datetime.utcnow)
