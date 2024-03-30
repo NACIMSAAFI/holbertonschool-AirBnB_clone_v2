@@ -32,7 +32,6 @@ class DBStorage:
 {password}@{host}/{database}",
             pool_pre_ping=True,
         )
-        # drop all tables if the HBNB_ENV is equal to test
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
 
@@ -45,7 +44,7 @@ class DBStorage:
                 obj.extend(self.__session.query(cls).all())
         else:
             if isinstance(cls, str):
-                cls = globals()[cls]  # Assuming cls is the name of the class
+                cls = globals()[cls]
             obj = self.__session.query(cls).all()
         return {"{}.{}".format(type(o).__name__, o.id): o for o in obj}
 
