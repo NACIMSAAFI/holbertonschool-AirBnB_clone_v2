@@ -54,7 +54,7 @@ class FileStorage:
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
         except (FileNotFoundError, json.JSONDecodeError) as e:
-            print(f"Error deserializing JSON: {e}")
+            pass
 
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
