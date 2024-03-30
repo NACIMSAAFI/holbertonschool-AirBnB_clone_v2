@@ -125,31 +125,20 @@ class HBNBCommand(cmd.Cmd):
         """Overrides the emptyline method of CMD"""
         pass
 
-    def do_create(self, args):
+    def do_create(self, arg):
         """Create an object of any class"""
-        class_name= args.split(" ")
-        if not args:
+        args = arg.split()
+        if len(args) == 0:
             print("** class name missing **")
-            return
-        elif class_name[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
-        kwargs = {}
-        for i in range(1, len(class_name)):
-            key, value = tuple(class_name[i].split("="))
-            if value[0] == '"':
-                value = value.strip('"').replace("_", " ")
-                kwargs[key] = value
-            else:
-                print("** attribute value invalid **")
-        if kwargs == {}:
-            obj = HBNBCommand.classes[class_name[0]]()
+            return False
+        if args[0] in HBNBCommand.classes:
+            new_dict = self._key_value_parser(args[1:])
+            instance = HBNBCommand.classes[args[0]](**new_dict)
         else:
-            obj = HBNBCommand.classes[class_name[0]](**kwargs)
-            storage.new(obj)
-            storage.close()
-        print(obj.id)
-        obj.save()
+            print("** class doesn't exist **")
+            return False
+        print(instance.id)
+        instance.save()
 
     def help_create(self):
         """Help information for the create method"""
