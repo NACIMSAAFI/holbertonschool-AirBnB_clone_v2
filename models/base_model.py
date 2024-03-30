@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module defines a base class for all models in our hbnb clone"""
+"""This is the base model class for AirBnB"""
 from sqlalchemy.ext.declarative import declarative_base
 import uuid
 import models
@@ -11,7 +11,7 @@ Base = declarative_base()
 
 
 class BaseModel:
-    """This class will defines all common attributes
+    """This class will defines all common attributes/methods
     for other classes
     """
     id = Column(String(60), unique=True, nullable=False, primary_key=True)
@@ -57,7 +57,6 @@ class BaseModel:
 
     def to_dict(self):
         """creates dictionary of the class  and returns
-
         """
         my_dict = dict(self.__dict__)
         my_dict["__class__"] = str(type(self).__name__)
@@ -71,3 +70,4 @@ class BaseModel:
         """ delete object
         """
         models.storage.delete(self)
+
