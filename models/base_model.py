@@ -10,7 +10,7 @@ Base = declarative_base()
 class BaseModel:
     """A base class for all hbnb models"""
     
-    id = Column(String(60), primary_key=True, nullable=False)
+    id = Column(String(60), primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     def __init__(self, *args, **kwargs):
@@ -22,7 +22,7 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                if hasattr(self, key):
+                if key != "__class__":
                     setattr(self, key, value)
 
     def __str__(self):
