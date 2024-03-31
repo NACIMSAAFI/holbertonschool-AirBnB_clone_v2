@@ -120,19 +120,20 @@ class TestHBNBCommand(unittest.TestCase):
             self.HBNB.onecmd("all Place")
             output = f.getvalue()
 
-        # Handle potential variations in the output format (assuming variations around ID)
-        id_start_index = output.find("id': ")  # Find the starting index of the ID section
+        id_start_index = output.find("id': ")
         if id_start_index != -1:
-            id_end_index = output.find("'", id_start_index + 5)  # Find the ending index
+            id_end_index = output.find("'", id_start_index + 5)
             if id_end_index != -1:
-                object_id = output[id_start_index + 5:id_end_index]  # Extract the ID
+                object_id = output[id_start_index + 5:id_end_index]
             else:
                 # Handle case where ID section is missing a closing quote
-                object_id = output[id_start_index + 5:].split()[0]  # Extract ID or first word
+                object_id = output[id_start_index + 5:].split()[0]
         else:
             # Handle case where the entire "id': '" section is missing
             self.fail("ID not found in output")
 
         self.assertIn(object_id, output)
+
+
 if __name__ == "__main__":
     unittest.main()
