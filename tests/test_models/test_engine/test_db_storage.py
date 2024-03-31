@@ -1,10 +1,8 @@
 #!/usr/bin/python3
-"""
-Contains the TestDBStorageDocs and TestDBStorage classes
+""" TestDBStorage classes
 """
 
 from datetime import datetime
-import inspect
 import models
 from models.engine import db_storage
 from models.amenity import Amenity
@@ -15,8 +13,6 @@ from models.review import Review
 from models.state import State
 from models.user import User
 import json
-import os
-import pep8
 import unittest
 DBStorage = db_storage.DBStorage
 classes = {"Amenity": Amenity, "City": City, "Place": Place,

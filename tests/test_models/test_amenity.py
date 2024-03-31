@@ -1,14 +1,12 @@
 #!/usr/bin/python3
 """
-Contains the TestAmenityDocs classes
+the TestAmenity classes
 """
 
 from datetime import datetime
-import inspect
 import models
 from models import amenity
 from models.base_model import BaseModel
-import pep8
 import unittest
 Amenity = amenity.Amenity
 
